@@ -25,20 +25,19 @@ def dir_select():
         print(direc+"/"+"me.txt")
         files=os.listdir(direc)
         if not files:
-            debug("Error_Dir")
+            debug("Error_Dir_No_Files","Red")
     except Exception as e:
         debug("Error_Dir"& e,"Red")
 def run():
-    #try:
-    for file in files:
-        file_date=str(time.gmtime(os.path.getatime(direc+"/"+file))[0])
-        if not os.path.exists(direc+"/"+file_date):
-            os.makedirs(direc+"/"+file_date)
-        os.replace( (direc+"/"+file) , (direc+"/"+file_date+"/"+file)  )
+    try:
+        for file in files:
+            file_date=str(time.gmtime(os.path.getatime(direc+"/"+file))[0])
+            if not os.path.exists(direc+"/"+file_date):
+                os.makedirs(direc+"/"+file_date)
+            os.replace( (direc+"/"+file) , (direc+"/"+file_date+"/"+file)  )
 
-    #except Exception as e:
-        #debug("Error_Run", "Red")
-        #print(e)
+    except Exception as e:
+        debug("Error_Run"&e, "Red")
 
 
 #--------------------------------------------------
