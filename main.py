@@ -3,7 +3,6 @@ from tkinter import filedialog
 import os,time
 #--------------------------------------------------
 direc=r""
-files_date=[]
 files=[]
 #--------------------------------------------------
 def debug(text,color):
@@ -27,7 +26,7 @@ def dir_select():
         if not files:
             debug("Error_Dir_No_Files","Red")
     except Exception as e:
-        debug("Error_Dir"& str(e),"Red")
+        debug(f"Error_Dir: {e}","Red")
 def run():
     count=0
     count_files=0
@@ -43,7 +42,7 @@ def run():
         debug((f"Finished With: \n {count} Folders Created \n {count_files} Files Moved"), "Green")
 
     except Exception as e:
-        debug("Error_Run"& str(e), "Red")
+        debug(f"Error_Dir: {e}", "Red")
 
 
 #--------------------------------------------------
