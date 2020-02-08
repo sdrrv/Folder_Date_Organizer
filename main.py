@@ -29,13 +29,18 @@ def dir_select():
     except Exception as e:
         debug("Error_Dir"& str(e),"Red")
 def run():
+    count=0
+    count_files=0
     try:
         for file in files:
             file_date=str(time.gmtime(os.path.getatime(direc+"/"+file))[0])
             if not os.path.exists(direc+"/"+file_date):
                 os.makedirs(direc+"/"+file_date)
+                count+=1
             os.replace( (direc+"/"+file) , (direc+"/"+file_date+"/"+file)  )
-        debug("Finished", "Green")
+            count_files+=1
+    
+        debug((f"Finished With: \n {count} Folders Created \n {count_files} Files Moved"), "Green")
 
     except Exception as e:
         debug("Error_Run"& str(e), "Red")
@@ -44,7 +49,7 @@ def run():
 #--------------------------------------------------
 app=Tk()
 app.title("Folder Date Organizer")
-app.geometry("250x200")
+app.geometry("270x220")
 #--------------------------------------------------
 label_dir=Label(app,text="Select the folder:",font=("Calibri",14))
 label_dir.grid(row=0,column=0, pady=20, padx=10)
