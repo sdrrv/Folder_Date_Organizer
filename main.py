@@ -1,20 +1,46 @@
 from tkinter import *
 from tkinter import filedialog
-import os
+import os,time
 #--------------------------------------------------
 direc=r""
+files_date=[]
+files=[]
 #--------------------------------------------------
 def debug(text,color):
     label_debug.config(text=text,fg=color)
 
+def thor(arg):
+    result=[]
+    for i in arg:
+        if i not in result:
+            result.append(i)
+    return result
+
 def dir_select():
+    global direc
+    global files
     try:
         direc=filedialog.askdirectory()
         debug("Dir Selected!","Green")
+        print(direc+"/"+"me.txt")
+        files=os.listdir(direc)
+        if not files:
+            debug("Error_Dir")
     except Exception as e:
-        debug("Error_Dir"& e)
+        debug("Error_Dir"& e,"Red")
 def run():
-    pass
+    #try:
+    for file in files:
+        file_date=str(time.gmtime(os.path.getatime(direc+"/"+file))[0])
+        if not os.path.exists(direc+"/"+file_date):
+            os.makedirs(direc+"/"+file_date)
+        os.replace( (direc+"/"+file) , (direc+"/"+file_date+"/"+file)  )
+
+    #except Exception as e:
+        #debug("Error_Run", "Red")
+        #print(e)
+
+
 #--------------------------------------------------
 app=Tk()
 app.title("Folder Date Organizer")
