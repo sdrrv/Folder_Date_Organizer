@@ -27,7 +27,7 @@ def dir_select():
         if not files:
             debug("Error_Dir_No_Files","Red")
     except Exception as e:
-        debug("Error_Dir"& e,"Red")
+        debug("Error_Dir"& str(e),"Red")
 def run():
     try:
         for file in files:
@@ -35,9 +35,10 @@ def run():
             if not os.path.exists(direc+"/"+file_date):
                 os.makedirs(direc+"/"+file_date)
             os.replace( (direc+"/"+file) , (direc+"/"+file_date+"/"+file)  )
+        debug("Finished", "Green")
 
     except Exception as e:
-        debug("Error_Run"&e, "Red")
+        debug("Error_Run"& str(e), "Red")
 
 
 #--------------------------------------------------
